@@ -17,6 +17,7 @@ class BarChart extends ImplicitlyAnimatedWidget {
     Duration swapAnimationDuration = const Duration(milliseconds: 150),
     Curve swapAnimationCurve = Curves.linear,
     this.didSelectPage,
+    this.didSetPageController,
     required this.dataList,
   }) : super(
           duration: swapAnimationDuration,
@@ -27,6 +28,7 @@ class BarChart extends ImplicitlyAnimatedWidget {
   final BarChartData data;
   final List<BarChartData> dataList;
   final Function(int)? didSelectPage;
+  final Function(PageController)? didSetPageController;
 
   /// We pass this key to our renderers which are supposed to
   /// render the chart itself (without anything around the chart).
@@ -56,6 +58,7 @@ class _BarChartState extends AnimatedWidgetBaseState<BarChart> {
       data: showingData,
       dataList: widget.dataList,
       didSelectPage: widget.didSelectPage,
+      didSetPageController: widget.didSetPageController,
       charts: widget.dataList
           .map(
             (item) => BarChartLeaf(

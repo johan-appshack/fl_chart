@@ -27,6 +27,7 @@ class AxisChartScaffoldWidget extends StatefulWidget {
     this.didSelectPage,
     required this.charts,
     this.dataList,
+    this.didSetPageController,
   });
   final Widget chart;
   final List<Widget> charts;
@@ -34,6 +35,7 @@ class AxisChartScaffoldWidget extends StatefulWidget {
   final List<AxisChartData>? dataList;
 
   final Function(int)? didSelectPage;
+  final Function(PageController)? didSetPageController;
 
   @override
   State<AxisChartScaffoldWidget> createState() =>
@@ -90,6 +92,7 @@ class _AxisChartScaffoldWidgetState extends State<AxisChartScaffoldWidget> {
 
   List<Widget> stackWidgets(BoxConstraints constraints) {
     pageController = PageController(initialPage: widget.charts.length);
+    widget.didSetPageController?.call(pageController);
     final widgets = <Widget>[
       Container(
         margin: widget.data.titlesData.allSidesPadding,
